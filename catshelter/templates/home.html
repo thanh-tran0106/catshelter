@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pets for Adoption</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        .cat-box {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .cat-box:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Pets for Adoption</h1>
+        <div class="row">
+            {% for record in records %}
+            <div class="col-md-4">
+                <div class="card mb-4 cat-box" onclick="window.location.href='{% url 'cat_detail' record.feline_id %}'">
+                    {% if record.photo %}
+                    <img src="{{ record.photo.url }}" class="card-img-top" alt="Photo of {{ record.name }}">
+                    {% else %}
+                    <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="No photo available">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ record.name }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

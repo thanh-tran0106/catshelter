@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home & Feline Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .mt-5 {
+            margin-top: 3rem !important;
+        }
+        .mt-3 {
+            margin-top: 1rem !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="mt-5">Welcome to Our Website</h1>
+        <a href="{% url 'signup' %}" class="button">Sign Up</a>
+        <a href="{% url 'login' %}" class="button">Login</a>
+    </div>
+    <div class="container">
+        <h1 class="mt-5">Feline Data</h1>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Breed</th>
+                    <th>Coloration</th>
+                    <th>Age</th>
+                    <th>Sex</th>
+                    <th>Favorite Toy</th>
+                    <th>Photo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record.feline_id }}</td>
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.breed }}</td>
+                    <td>{{ record.coloration }}</td>
+                    <td>{{ record.age }}</td>
+                    <td>{{ record.sex }}</td>
+                    <td>{{ record.fav_toy }}</td>
+                    <td>
+                        {% if record.photo %}
+                            <img src="{{ record.photo.url }}" alt="Photo of {{ record.name }}" style="width: 100px; height: auto;">
+                        {% else %}
+                            No photo
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

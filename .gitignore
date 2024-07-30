@@ -1,0 +1,14 @@
+*.pyc
+__pycache__/
+.env
+db.sqlite3
+/media/
+/static/
+*.log
+*.pot
+*.mo
+*.swp
+.DS_Store
+.idea/
+*.sublime-project
+*.sublime-workspace
