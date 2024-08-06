@@ -9,7 +9,9 @@ def home_view(request):
 
 def cat_detail_view(request, feline_id):
     cat = get_object_or_404(Feline, pk=feline_id)
-    return render(request, 'cat_detail.html', {'cat': cat})
+#    medical_records = MedicalRecord.medical_records.all()
+    medical_records = MedicalRecord.objects.filter(feline=cat)
+    return render(request, 'cat_detail.html', {'cat': cat, 'medical_records': medical_records})
 
 def medical_record_search_view(request):
     form = CatIDSearchForm(request.GET or None)

@@ -1,8 +1,10 @@
 # myapp/sftp_storage.py
 
 import paramiko
-import logging
 from storages.backends.sftpstorage import SFTPStorage
+import logging
+
+logger = logging.getLogger(__name__)
 
 class CustomSFTPStorage(SFTPStorage):
     def __init__(self, *args, **kwargs):
@@ -11,6 +13,7 @@ class CustomSFTPStorage(SFTPStorage):
 
     def _get_sftp_client(self):
         """Create an SFTP client with custom host key policies."""
+        logger.debug("Connecting to SFTP server at %s:%s", self.host, self.port)
         transport = paramiko.Transport((self.host, self.port))
         transport.connect(username=self.username, password=self.password)
         sftp = paramiko.SFTPClient.from_transport(transport)
@@ -44,15 +47,3 @@ class CustomSFTPStorage(SFTPStorage):
     def url(self, name):
         """Return the URL of the file."""
         return f'{self.base_url}/{name}'
-
-
-
-class CustomSFTPStorage(SFTPStorage):
-    def _get_sftp_client(self):
-        logger.debug("Connecting to SFTP server")
-        transport = paramiko.Transport((self.host, self.port))
-        transport.connect(username=self.username, password=self.password)
-        sftp = paramiko.SFTPClient.from_transport(transport)
-        sftp.load_system_host_keys()
-        sftp.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        return sftp

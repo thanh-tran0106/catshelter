@@ -15,7 +15,7 @@ class Feline(models.Model):
 
 class MedicalRecord(models.Model):
     record_id = models.AutoField(primary_key=True)
-    feline = models.ForeignKey(Feline, on_delete=models.CASCADE)
+    feline = models.ForeignKey(Feline, on_delete=models.CASCADE, related_name='medical_records')
     checkupdate = models.DateField()
     treatment = models.CharField(max_length=100)
     doctor_name = models.CharField(max_length=50)
