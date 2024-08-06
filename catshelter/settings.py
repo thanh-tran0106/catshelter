@@ -55,17 +55,22 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # Absolute path to static files director
 DEFAULT_FILE_STORAGE = 'storages.backends.sftpstorage.SFTPStorage'
 
 SFTP_STORAGE_OPTIONS = {
-    'host': '192.168.32.196',       # SFTP server address
-    'port': 22,                      # SFTP port
-    'username': 'thanh',     # SFTP username
-    'password': 'm4st3r',     # SFTP password
-    'root': '/var/www/media',        # Root directory for media files
+    'host': '192.168.32.152',
+    'port': 22,
+    'username': 'thanh',
+    'password': 'm4st3r',
+    'root': '/var/www/media',
+    'base_url': 'http://192.168.32.196/media',
 }
 
-SFTP_HOST = '192.168.32.196'
-SFTP_PORT = 22
-SFTP_USER = 'thanh'
-SFTP_PASSWORD = 'm4st3r'
+SFTP_STORAGE_HOST = '192.168.32.196'
+SFTP_STORAGE_ROOT = '/var/www/media'
+SFTP_STORAGE_PARAMS = {
+    'username': 'thanh',
+    'password': 'm4st3r',  # Consider using SSH key for security
+}
+
+
 MEDIA_URL = 'http://192.168.32.196/media/'
 MEDIA_ROOT = '/var/www/media'
 

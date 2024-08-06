@@ -24,6 +24,31 @@
                 <p class="card-text"><strong>Favorite Toy:</strong> {{ cat.fav_toy }}</p>
             </div>
         </div>
+        <div class="mt-4">
+            <h2>Medical Records</h2>
+            {% if medical_records %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Checkup Date</th>
+                            <th>Treatment</th>
+                            <th>Doctor Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in medical_records %}
+                            <tr>
+                                <td>{{ record.checkupdate }}</td>
+                                <td>{{ record.treatment }}</td>
+                                <td>{{ record.doctor_name }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No medical records available.</p>
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>
